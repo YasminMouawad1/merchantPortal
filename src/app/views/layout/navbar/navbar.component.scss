@@ -1,0 +1,92 @@
+
+
+.sideBar{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 16%;
+    height: 100vh;
+    padding: 3% 1%; 
+    background-color: #eceff1;
+}
+
+.sideBar img{
+    width: 80%;
+    margin-left: 6%;
+}
+
+.trade{  
+    text-align: center;
+    margin: 5rem 0px;
+}
+
+.trade img{
+    width: 50%;
+    margin-left: 0px;
+    border-radius: 50%;
+}
+
+.trade h2{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.sideBar ul{ 
+    list-style-type: none;
+}
+
+.sideBar ul li{
+    margin: 1.3rem 0px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.sideBar ul li a{
+    color: #000;
+    text-decoration: none;
+}
+
+.sideBar ul li .active{
+    color: #661a74 ;
+}
+
+
+.logout{
+    position: absolute;
+    bottom: 2rem; 
+    width: 100%; 
+}
+
+.logout a{
+    font-weight: bold;
+    font-size: 18px;
+
+}
+.logout h6{
+    font-size: 17px; 
+    margin-top: 5px;
+    margin-left: 10%;
+}
+.logout i{
+    background-color: #000;
+    border-radius: 8px;
+    padding: 4px;
+    color: #fff;
+}
+
+.logout button{
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer; 
+    border: none;
+}
+
+.dropdown-menu li button{
+    font-size: 16px;
+}
+
+.dropdown-menu li button i{
+    background-color: transparent;
+    color: #000;
+    font-weight: bold;
+}

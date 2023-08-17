@@ -1,0 +1,30 @@
+.title p{
+   margin-bottom: 7px;
+   font-size: 14px;
+   font-weight: bold;
+   color: #000;
+}
+
+.title h2{
+    font-size: 20px;
+    font-weight: bold;
+    color: #661a74;
+}
+
+.search{
+    width: 85%;
+    float: right;
+}
+
+.search span{
+    border: 2px solid #ced4da;
+    border-radius: 12px;
+    border-right: 0px;
+    background-color: transparent;
+}
+
+.search input{
+    border: 2px solid #ced4da;
+    border-radius: 12px;
+    border-left: 0px;
+}

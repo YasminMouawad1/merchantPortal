@@ -1,0 +1,134 @@
+.title p{
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+ }
+ 
+ .title h2{
+     font-size: 20px;
+     font-weight: bold;
+     color: #661a74;
+ }
+ 
+ .search{
+     width: 85%;
+     float: right;
+ }
+ 
+ .search span{
+     border: 2px solid #ced4da;
+     border-radius: 12px;
+     border-right: 0px;
+     background-color: transparent;
+ }
+ 
+ .search input{
+     border: 2px solid #ced4da;
+     border-radius: 12px;
+     border-left: 0px;
+ }
+ 
+.expand table{
+    width: 96%; 
+    margin: auto;
+    border-radius: 14px;
+}
+
+.expand table th{
+    padding-top: 15px;
+    padding-left: 15px;
+    font-size: 10px;
+    color: #6b6a6a;
+}
+
+table td{
+    text-align: center;
+}
+
+.expand table td{
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+.expand table button{
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+}
+
+.light table{
+    background-color: #f8f9fa;
+}
+
+.filePdf{
+    margin-left: 5px;
+    color: #0b7e4d;
+    cursor: pointer;
+}
+
+
+.logopdf{
+    max-width:180px;
+    border-radius: 50%;
+ }
+
+ .download{
+    background-color: #8d5d95;
+    border: #8d5d95;
+    float: right;
+    margin-right: 2rem;
+    margin-top: 1rem;
+ }
+
+ .promoIcon{
+    width: 40px;
+    height: 40px;
+ }
+
+ .contain-data{ 
+    margin: 0 auto;
+    padding: 20px; 
+ }
+
+ .contain-data label{
+    font-weight: 600;
+    font-family: 'fantasy';
+    font-size: 18px;
+ }
+
+ .contain-data .note{
+    font-family: 'fantasy';
+    font-size: 18px;
+    text-align: center;
+    margin: 30px 0px;
+ }
+
+ .modal-content{
+    width: 90vw;
+    transform: translateX(-31%);
+ }
+
+ #filePdfTransaction{ 
+    width: 95%;
+    margin: 0 auto;
+    padding: 2rem;
+ }
+
+ table tfoot{
+    background-color: #8d5d95;
+    color: #fff;
+}
+
+.tabPDF tr td , .tabPDF thead th{
+    border: 1px solid #4a474a;
+    text-align: right;
+}
+
+.containPDF{
+    border: 2px double #ddd;
+    padding: 2rem;
+}

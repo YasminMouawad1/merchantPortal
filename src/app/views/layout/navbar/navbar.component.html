@@ -1,0 +1,47 @@
+ <div class="sideBar">
+         <img src="assets/images/logo.png" alt="">
+
+         <div class="trade">
+            <img src="{{MerchantDetail.merchantLogo}}" alt="" >
+            <h2>{{merchantName}}</h2>
+         </div>
+
+         <ul>
+            <li>
+                <i class="fa-solid fa-chart-column"></i> 
+                <a routerLink="dashboard" routerLinkActive="active" (click)="changeNavigation($event)">Selling Statistics</a>
+            </li>
+            <li>
+                <i class="fa-solid fa-wallet"></i>  
+                <a routerLink="transactions" routerLinkActive="active" (click)="changeNavigation($event)"> Transactions / <span>المعاملات </span></a>
+            </li>
+            <li>
+                <i class="fa-solid fa-money-bill-wave"></i> 
+                <a routerLink="claims" routerLinkActive="active" (click)="changeNavigation($event)"> Claims History / <span>سجل المطالبات</span></a>
+            </li>
+         </ul>
+
+
+         <div class="d-flex align-items-center logout"> 
+           
+            <div class="dropdown">
+                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-power-off"></i>  Logout
+                </a>
+              
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li>
+                    <button (click)="logout()" class="dropdown-item">
+                        <i class="fas fa-power-off"></i> Logout</button>
+                 </li>
+                  <li>
+                    <button class="dropdown-item" (click)="changePassword()">
+                    <i class="fa-solid fa-lock"></i> change password</button>
+                </li> 
+                </ul>
+              </div>
+         </div>
+     </div>
+
+
+     

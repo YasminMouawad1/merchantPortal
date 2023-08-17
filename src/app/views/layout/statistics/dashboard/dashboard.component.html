@@ -1,0 +1,173 @@
+ <div class="content">
+   <!-- <div class="overlay-img">
+      <img src="../../../../../assets/images/labour.jpg">
+   </div> -->
+
+
+<div class="container-fluid" style="margin-top: 2rem;">
+  
+   <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+             <div class="title">
+                  <!-- <p>10:01 AM, Wednesday, 31 August 2022</p> -->
+                  <h2> Selling Statistics</h2>
+             </div>
+        </div>
+        <div class="col-md-6">
+           <!-- <div class="input-group mb-3 search">
+               <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+               <input type="text" class="form-control" placeholder=" search" aria-describedby="basic-addon1">
+             </div> -->
+
+             <!-- <div class="overlay-img">
+               <img src="../../../../../assets/images/labour.jpg">
+            </div> -->
+        </div> 
+   </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+             <div class="item">
+                  <h6>إجمالي عدد المعاملات </h6>
+                  <div class="sales">
+                     <div class="num">
+                        <h3>{{totalTransactions | number}}</h3>
+                        <!-- <p><i class="fa-solid fa-arrow-down"></i> 13.8%</p> -->
+                     </div>
+                     <div class="chart">
+                        <svg   id="chart"   width="640"   height="334"   viewBox="0 0 640 334"   xmlns="http://www.w3.org/2000/svg" >     		     <path d="  M0,334  h64  v-139.30346648593823  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M80,334  h64  v-150.75029226742828  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M160,334  h64  v-105.11188931245428  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M240,334  h64  v-197.9721671062412  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M320,334  h64  v-144.8459720634622  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M400,334  h64  v-277.47324116472373  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M480,334  h64  v-194.28384944636142  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M560,334  h64  v-284.7963087055048  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> </svg>
+                     </div>
+                  </div>
+             </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="item">
+                 <h6>إجمالي قيمة المعاملات </h6>
+                 <div class="sales">
+                    <div class="num">
+                       <h3>{{amountTransactions | number}}</h3>
+                       <!-- <p id="product"><i class="fa-solid fa-arrow-up"></i> 13.8%</p> -->
+                    </div>
+                    <div class="chart">
+                        <svg   id="chart"   width="640"   height="334"   viewBox="0 0 640 334"   xmlns="http://www.w3.org/2000/svg" >     		     <path d="  M0,334  h64  v-139.30346648593823  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#cac8fd" /> <path d="  M80,334  h64  v-150.75029226742828  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#cac8fd" /> <path d="  M160,334  h64  v-105.11188931245428  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#cac8fd" /> <path d="  M240,334  h64  v-197.9721671062412  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#cac8fd" /> <path d="  M320,334  h64  v-144.8459720634622  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#cac8fd" /> <path d="  M400,334  h64  v-277.47324116472373  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#cac8fd" /> <path d="  M480,334  h64  v-194.28384944636142  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#cac8fd" /> <path d="  M560,334  h64  v-284.7963087055048  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#cac8fd" /> </svg>
+                   </div>
+                 </div>
+            </div>
+        </div>
+
+       <div class="col-md-4">
+        <div class="item">
+             <h6>إجمالي صافي المعاملات </h6>
+             <div class="sales">
+                <div class="num">
+                   <h3>{{netAmountTransactions | number}}</h3>
+                   <!-- <p><i class="fa-solid fa-arrow-down"></i> 13.8%</p> -->
+                </div>
+                <div class="chart">
+                    <svg   id="chart"   width="640"   height="334"   viewBox="0 0 640 334"   xmlns="http://www.w3.org/2000/svg" >     		     <path d="  M0,334  h64  v-139.30346648593823  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9cedc4" /> <path d="  M80,334  h64  v-150.75029226742828  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9cedc4" /> <path d="  M160,334  h64  v-105.11188931245428  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9cedc4" /> <path d="  M240,334  h64  v-197.9721671062412  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9cedc4" /> <path d="  M320,334  h64  v-144.8459720634622  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9cedc4" /> <path d="  M400,334  h64  v-277.47324116472373  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9cedc4" /> <path d="  M480,334  h64  v-194.28384944636142  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9cedc4" /> <path d="  M560,334  h64  v-284.7963087055048  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9cedc4" /> </svg>
+                </div>
+             </div>
+        </div>
+       </div>
+
+       <!-- <div class="col-md-3">
+         <div class="item">
+              <h6>settled transactions </h6>
+              <div class="sales">
+                 <div class="num">
+                    <h3>{{settledTransactions | number}}</h3>
+                     <p><i class="fa-solid fa-arrow-down"></i> 13.8%</p> 
+                 </div>
+                 <div class="chart">
+                  <svg   id="chart"   width="640"   height="334"   viewBox="0 0 640 334"   xmlns="http://www.w3.org/2000/svg" >     		     <path d="  M0,334  h64  v-139.30346648593823  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M80,334  h64  v-150.75029226742828  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M160,334  h64  v-105.11188931245428  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M240,334  h64  v-197.9721671062412  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M320,334  h64  v-144.8459720634622  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M400,334  h64  v-277.47324116472373  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M480,334  h64  v-194.28384944636142  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> <path d="  M560,334  h64  v-284.7963087055048  q0,-2 -2,-2  h-60  q-2,0 -2,2  Z" fill="#9eeaff" /> </svg>
+               </div>
+              </div>
+         </div>
+        </div> -->
+
+    </div>
+    <div class="row">
+       <div class="col-md-12 mt-4">
+         <div class="card divTilte">
+            <div class="card-title">
+                 <h2>Welcome To MidTakseet Merchant Portal</h2>
+            </div>
+              <div class="card-body">
+               
+
+              </div>
+         </div>
+           <!-- <div class="card">
+               <div class="card-header">
+                    <h6>Statistics</h6>
+                    <select class="form-select">
+                        <option>last 3 months</option>
+                        <option>last6 months</option>
+                        <option>last 9 months</option>
+                    </select>
+               </div>
+               <div class="card-body">
+                  <img alt="" src="assets/images/statistics.PNG" class="w-100">
+               </div>
+           </div> -->
+       </div>
+
+    </div>
+
+    <!-- <div class="row">
+      <div class="col-md-12 mt-4">
+         <h6> Daily Transactions : {{dailyTransactions}}</h6>
+         <div class="expand">
+            <table>
+               <tbody   *ngFor="let merchant of claimRequestsForMerchantData;let i=index" >
+               <tr>
+                  <td>
+                     <table [style.background-color]="!hideme[i] ? '#eceff1' : '#e5f4ef'" style="width: 85%;">
+                        <tr>
+                           <th>Claim Number / رقم المطالبة</th> 
+                           <th>Transactions Count / عدد الطلبات</th>
+                           <th>Claim Amount / اجمالي المطالبة</th>
+                           <th>Claim Date / تاريخ المطالبة</th>
+                           <th>Status / الحالة</th>
+                           <th rowspan="2">
+                             <button data-bs-toggle="collapse" data-bs-target="#i" aria-expanded="false" aria-controls="collapseExample" (click)="changeValue(i)">
+                               
+                           </button>
+                         </th>
+                        </tr>
+                        <tr>
+                           <td>{{merchant.claimNo}}</td> 
+                           <td>{{transitionCount[i]}}</td> 
+                           <td>{{claimsAmount[i]}}</td> 
+                           <td></td> 
+                           <td>
+                              {{merchant.statusAname}}
+                             
+                           </td>
+                        </tr> 
+                    </table>
+                  </td>
+               </tr>
+             
+              
+         </tbody>
+          </table>
+      
+           
+      </div>
+      </div>
+
+      <div>
+         <p class="pendP"> Total amount of pending transactions : {{amountPendingTransactions}}</p>
+      </div>
+    </div> -->
+    
+  
+    
+</div>
+   
+</div>
+ 

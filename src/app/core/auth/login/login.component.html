@@ -1,0 +1,45 @@
+<div class="content">
+    <div class="container login">
+          <img src="assets/images/logo.png" alt="" class="logo">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+               <div>
+                   <label for="userNameOrEmailAddress">Username/Mobile number</label>
+                   <input id="userNameOrEmailAddress" type="text"
+                     formControlName="userNameOrEmailAddress"
+                     placeholder="User Name or Mobile number" class="form-control"
+                     [ngClass]="{
+                        'is-invalid':
+                          submitted && f['userNameOrEmailAddress'].errors
+                      }">
+                 <div
+                    *ngIf="submitted && f['userNameOrEmailAddress'].errors"
+                    class="invalid-feedback"
+                  >
+
+                 <div *ngIf="f['userNameOrEmailAddress'].errors['required']">
+                      UserName is required
+                    </div>
+                  </div>
+
+               </div>
+
+               <div>
+                   <label for="password">Password</label>
+                   <input id="password" formControlName="password"
+                   type="password" placeholder="Your Password " class="form-control"
+                   [ngClass]="{'is-invalid': submitted && f['password'].errors}">
+
+                   <div
+                   *ngIf="submitted && f['password'].errors"
+                   class="invalid-feedback"
+                 >
+                   <span *ngIf="f['password'].errors['required']"
+                     >Password is required</span
+                   >
+                 </div>
+              </div>
+               <button type="submit">Login</button> 
+               <p *ngIf="showErrorMsg" class="alert alert-danger errorMsg">{{error}}</p>
+          </form>
+    </div>
+</div>

@@ -1,0 +1,526 @@
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center align-items-center">
+       <div class="col-md-4">
+            <div class="title">
+                 <!-- <p>10:01 AM, Wednesday, 31 August 2022</p> -->
+                 <h2> Transactions </h2>
+            </div>
+       </div>
+
+       <div class="col-md-5" *ngIf="showSearchFiled">
+          <div class="input-group mb-3 search">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <input type="text" class="form-control" [(ngModel)]="SearchTerm"
+              placeholder="What are you searching for " aria-describedby="basic-addon1">
+            </div>
+       </div> 
+ 
+       <div class="col-md-3" *ngIf="showSearchFiled">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+            <input matStartDate formControlName="start" placeholder="Start date" [(ngModel)]="start">
+            <input matEndDate formControlName="end" placeholder="End date" [(ngModel)]="end">
+          </mat-date-range-input> 
+          <mat-datepicker-toggle matIconSuffix [for]="picker"  class="btnToggle"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        
+          <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+          <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field> 
+ 
+      </div>
+
+     <div class="col-md-8" *ngIf="!showSearchFiled"></div>
+  </div>
+</div>
+
+<p  *ngIf="emptyMsg" class="alert alert-warning text-center">Data is empty</p>
+<div *ngIf="!emptyMsg" class="container mt-4">
+    <div class="row">
+      
+      <!-- <div *ngIf="showSearchFiled"> 
+        <button [disabled]="disableExecl" class="btn btn-success mb-3 float-end" (click)="exportexcel()"> Excel <i class="fas fa-file-excel"></i></button>
+      </div>     -->
+          <ul ngbNav #justifiednav="ngbNav" [activeId]="2" class="nav-tabs">
+             <!-- <li [ngbNavItem]="1">
+               <a ngbNavLink (click)="hideSearch()">
+                 <span class="d-none d-sm-block">Due transactions المعاملات المستحقة</span>
+                 <div class="line"></div>
+               </a>
+               <ng-template ngbNavContent>
+                 <ng-template [ngTemplateOutlet]="TabDueTransactions"></ng-template>
+               </ng-template>
+             </li> -->
+             <li [ngbNavItem]="2">
+                 <a ngbNavLink (click)="hideSearch()">
+                   <span class="d-none d-sm-block">Pending transactions المعاملات المعلقة</span>
+                   <div class="line"></div>
+                 </a>
+                 <ng-template ngbNavContent>
+                   <ng-template [ngTemplateOutlet]="TabPendingTransactions"></ng-template>
+                 </ng-template>
+               </li>
+             <li [ngbNavItem]="3">
+               <a ngbNavLink (click)="hideSearch()">
+                 <span class="d-none d-sm-block">Cancelled transactions  المعاملات المرتجعة</span>
+                 <div class="line"></div>
+               </a>
+               <ng-template ngbNavContent>
+                 <ng-template [ngTemplateOutlet]="TabCanceledTransactions"></ng-template>
+               </ng-template>
+             </li>
+             <li [ngbNavItem]="4">
+                 <a ngbNavLink (click)="hideSearch()">
+                   <span class="d-none d-sm-block">Approval transactions  المعاملات المعتمدة</span>
+                   <div class="line"></div>
+                 </a>
+                 <ng-template ngbNavContent>
+                   <ng-template [ngTemplateOutlet]="TabPaidTransactions"></ng-template>
+                 </ng-template>
+            </li>
+            <li [ngbNavItem]="5">
+              <a ngbNavLink (click)="showSearch()">
+                <span class="d-none d-sm-block">Transactions history / سجل المعاملات </span>
+                <div class="line"></div>
+              </a>
+              <ng-template ngbNavContent>
+                <ng-template [ngTemplateOutlet]="TabAllTarnsactions"></ng-template>
+              </ng-template>
+            </li>
+           </ul>
+           <div [ngbNavOutlet]="justifiednav"></div>
+
+
+
+   <ng-template #TabDueTransactions>
+      <div class="row mt-4 data">
+         <div class="col-lg-12">
+             <div  class="item">
+                 <table *ngFor="let merchant of  merchantDueTransactions" [ngStyle]="{ 'background-color':merchant.isSelected ? '#e5f4ef':'#eceff1'}">
+                   
+                  <tr>
+                         <th rowspan="2">
+                          <input  [(ngModel)]="merchant.isSelected" (change)="getCheckedItemList()"   type="checkbox" class="form-check-input">
+                        </th>
+                        <th>رقم المعاملة</th>
+                         <th>اسم الفرع</th>
+                         <th>اسم العميل</th>
+                         <th>قيمة المعاملة</th>
+                         <th>الرقم القومي</th>
+                         <th> نسبة عمولة التاجر</th>
+                         <th>عمولة التاجر</th>
+                         <th>مصاريف ادارية</th>
+                         <th>نسبة الخصم</th>
+                         <th>قيمة الخصم </th>
+                         <th>تاريج المعاملة </th>
+                         <th>الصافي</th>
+                     </tr>
+                     <tr>
+                      <td>{{merchant.debtRecordCode}}</td>
+                         <td>{{merchant.branchAname}}</td>
+                         <td
+                            class="text-truncate"
+                            style="max-width: 130px;direction: rtl;"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="{{ merchant.clientAname }}"
+                         >{{merchant.clientAname}}</td>
+                         <td>{{merchant.loanAmount}}</td>
+                         <td>{{merchant.nationalId}}</td>
+                         <td>{{merchant.merchantCommissionRate}}</td>
+                         <td>{{merchant.merchantCommission}}</td>
+                         <td>{{merchant.adminFee}}</td>
+                         <td>{{merchant.merchantDiscountRate}}</td>
+                         <td>{{merchant.merchantDiscount}}</td>
+                         <td>{{merchant.bookingDate}}</td>
+                         <td>{{merchant.merchantDue}}</td>
+                     </tr>
+                 </table>
+             </div>
+             <div class="text-center">
+                 <button class="btn btnClaim" data-bs-toggle="modal" data-bs-target="#claimModal">Claim</button>
+             </div>
+         </div>
+      </div>
+   </ng-template>
+
+   <ng-template #TabPendingTransactions>
+     <div class="row mt-4 ">
+         <div class="col-lg-12">
+             <div  class="item pending">
+                 <table *ngFor="let merchant of  merchantPendingTransactions"  class="w-100">
+                     <tr>
+                      <th>رقم المعاملة</th>
+                         <th>اسم الفرع</th>
+                         <th>اسم العميل</th>
+                         <th>قيمة المعاملة</th> 
+                         <th> نسبة عمولة التاجر</th>
+                         <th>عمولة التاجر</th>
+                         <th>مصاريف ادارية</th>
+                         <th>نسبة الخصم</th>
+                         <th>قيمة الخصم </th>
+                         <th>تاريج المعاملة </th>
+                         <th>الصافي</th>
+                     </tr>
+                     <tr>
+                      <td>{{merchant.debtRecordCode}}</td>
+                        <td>{{merchant.branchAname}}</td>
+                        <td
+                            class="text-truncate"
+                            style="max-width: 130px;direction: rtl;"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="{{ merchant.clientAname }}"
+                         >{{merchant.clientAname}}</td>
+                        <td>{{merchant.loanAmount}}</td> 
+                        <td>{{merchant.merchantCommissionRate}} %</td>
+                        <td>{{merchant.merchantCommission}}</td>
+                        <td>{{merchant.adminFee}}</td>
+                        <td>{{merchant.merchantDiscountRate}} %</td>
+                        <td>{{merchant.merchantDiscount}}</td>
+                         <td>{{merchant.bookingDate}}</td>
+                         <td>{{merchant.merchantDue}}</td>
+                     </tr>
+                 </table>
+             </div>
+         </div>
+     </div>
+ </ng-template>
+
+   <ng-template #TabCanceledTransactions>
+      <div class="row mt-4">
+         <div class="col-lg-12">
+             <div  class="item pending">
+                 <table *ngFor="let merchant of  merchantTabCanceledTransactions" class="w-100">
+                     <tr>
+                      <th>رقم المعاملة</th>
+                         <th>اسم الفرع</th>
+                         <th>اسم العميل</th>
+                         <th>قيمة المعاملة</th> 
+                         <th> نسبة عمولة التاجر</th>
+                         <th>عمولة التاجر</th>
+                         <th>مصاريف ادارية</th>
+                         <th>نسبة الخصم</th>
+                         <th>قيمة الخصم </th>
+                         <th>تاريج المعاملة </th>
+                         <th>الصافي</th>
+                     </tr>
+                     <tr>
+                        <td>{{merchant.debtRecordCode}}</td>
+                          <td>{{merchant.branchAname}}</td>
+                          <td
+                          class="text-truncate"
+                          style="max-width: 130px;direction: rtl;"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="top"
+                          title="{{ merchant.clientAname }}"
+                          >{{merchant.clientAname}}</td>
+                          <td>{{merchant.loanAmount}}</td> 
+                          <td>{{merchant.merchantCommissionRate}} %</td>
+                          <td>{{merchant.merchantCommission}}</td>
+                          <td>{{merchant.adminFee}}</td>
+                          <td>{{merchant.merchantDiscountRate}} %</td>
+                          <td>{{merchant.merchantDiscount}}</td>
+                          <td>{{merchant.bookingDate}}</td>
+                          <td>{{merchant.merchantDue}}</td>
+                     </tr>
+                 </table>
+             </div>
+         </div>
+     </div>
+   </ng-template>
+
+
+ <ng-template #TabPaidTransactions>
+     <div class="row mt-4">
+         <div class="col-lg-12">
+             <div  class="item pending">
+                 <table *ngFor="let item of merchantPaidTransactions" class="w-100">
+                     <tr>
+                      <th>رقم المعاملة</th>
+                      <th>اسم الفرع</th>
+                      <th>اسم العميل</th>
+                      <th>قيمة المعاملة</th> 
+                      <th> نسبة عمولة التاجر</th>
+                      <th>عمولة التاجر</th>
+                      <th>مصاريف ادارية</th>
+                      <th>نسبة الخصم</th>
+                      <th>قيمة الخصم </th>
+                      <th>تاريج المعاملة </th>
+                      <th>الصافي</th>
+                     </tr>
+                     <tr>
+                       <td>{{item.debtRecordCode}}</td>
+                         <td>{{item.brachname}}</td>
+                         <td
+                         class="text-truncate"
+                         style="max-width: 130px;direction: rtl;"
+                         data-bs-toggle="tooltip"
+                         data-bs-placement="top"
+                         title="{{ item.clientAname }}"
+                         >{{item.clientAname}}</td>
+
+                         <td>{{item.transactionAmount}}</td> 
+                         <td>{{item.merchantCommissionRate}} %</td>
+                         <td>{{item.merchantCommission}}</td>
+                         <td>{{item.adminFee}}</td>
+                         <td>{{item.merchantDiscountRate}} %</td>
+                         <td>{{item.merchantDiscount}}</td>
+                         <td>{{item.bookingDate}}</td>
+                         <td>{{item.merchantDue}}</td>
+                     </tr>
+                 </table>
+             </div>
+         </div>
+     </div>
+ </ng-template>
+
+ <ng-template #TabAllTarnsactions>
+  <div class="row mt-4 ">
+      <div class="col-lg-12">
+        <div class="d-flex justify-content-end">
+          <button class="btnExcel" (click)="exportexcel()"><i class="fa-regular fa-file-excel"></i> Excel</button>
+        </div>
+          <div  class="item pending" id="allLsit">
+              <table class="table table-striped tabAll">
+                  <tr>
+                    <th>رقم المعاملة</th>
+                    <th>اسم الفرع</th>
+                    <th>اسم العميل</th>
+                    <th>قيمة المعاملة</th> 
+                    <th> نسبة عمولة التاجر</th>
+                    <th>عمولة التاجر</th>
+                    <th>مصاريف ادارية</th>
+                    <th>نسبة الخصم</th>
+                    <th>قيمة الخصم </th>
+                    <th>تاريج المعاملة </th>
+                    <th>الصافي</th>
+                    <th>الحالة</th>
+                  </tr>
+                  <tr   *ngFor="let merchant of merchantAllTransactions | searchTransactions : SearchTerm | searchRangeDate : start : end"  class="w-100">
+                   <td>{{merchant.debtRecordCode}}</td>
+                     <td>{{merchant.branchAname}}</td>
+                     <td
+                         class="text-truncate"
+                         style="max-width: 130px;direction: rtl;"
+                         data-bs-toggle="tooltip"
+                         data-bs-placement="top"
+                         title="{{ merchant.clientAname }}"
+                      >{{merchant.clientAname}}</td>
+                     <td>{{merchant.loanAmount}}</td> 
+                     <td>{{merchant.merchantCommissionRate}} %</td>
+                     <td>{{merchant.merchantCommission}}</td>
+                     <td>{{merchant.adminFee}}</td>
+                      <td>{{merchant.merchantDiscountRate}} %</td>
+                      <td>{{merchant.merchantDiscount}}</td>
+                      <td>{{merchant.bookingDate}} </td>
+                      <td>{{merchant.merchantDue}}</td>
+                      <td>{{merchant.statusAname}}</td>
+                  </tr>
+              </table>
+          </div>
+      </div>
+  </div>
+</ng-template>
+
+
+ <!-------------------- claims Modal ----------------------------------->
+ <div class="modal fade" id="claimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-body">
+             <img src="assets/images/logo.png" alt="">
+
+             <div *ngIf="checkedList.length == 0" class="mt-4">
+                 <p  class="alert alert-danger">Please choose at least one transaction to claim it!</p>
+             </div>
+
+             <div  *ngIf="checkedList.length > 0">
+                <h5>Are you sure you want to claim these transactions ?</h5>
+                <div class="col-lg-12 mt-4">
+                    <div  class="item showData">
+                        <table  *ngFor="let item of checkedList">
+                            <tr>
+                                <th>Branch name</th>
+                                <th>Client's name</th>
+                                <th>Transaction number</th>
+                                <th>Down payment</th>
+                                <th>Transaction amount</th>
+                                <th>National ID</th>
+                            </tr>
+                            <tr>
+                              <td>{{item.branchAname}}</td>
+                              <td>{{item.clientAname}}</td>
+                              <td>{{item.debtRecordCode}}</td>
+                              <td>{{item.downPaymentAmt}}</td>
+                              <td>{{item.loanAmount}}</td>
+                              <td>{{item.nationalId}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <span *ngIf="spWarning" class="alert alert-warning spWarning">You canceled the confirming</span>
+              </div>
+                <div class="mt-4">
+                  <button type="submit" class="btn btnClaim" [disabled]="disableconfirmBtn" (click)="confirm()"  [disabled]="this.checkedList.length == 0 ">Confirm</button>
+                  <button type="button" class="btn btnClaim cancel" data-bs-dismiss="modal">Cancel</button>
+                </div>
+
+
+         </div>
+       </div>
+     </div>
+   </div>
+    </div>
+ </div>
+
+ <!-- ------------------- pdf -------------------------- -->
+ <!-- <button class="btn btn-primary download" [disabled]="!showDownloadPDF" (click)="downloadPDF()">Download PDF</button>
+  -->
+ <!-- <div id="hidFilePdf">
+
+<div id="filePdfTransaction" class="container mt-lg-4">
+   <div class="row mb-4">
+        <div class="col-md-5">
+             <img src="{{MerchantDetail.merchantLogo}}" alt="" class="logopdf">
+        </div>
+        <div class="col-md-7">
+            <h2>مطالبة مالية</h2>
+        </div>
+   </div>
+
+  <div class="contain-data">
+
+  <div class="row text-end">
+    <div class="col-md-9">
+        <p>{{dateNow.toLocaleDateString()}}</p>
+    </div>
+     <div class="col-md-3">
+         <label>: التاريخ</label>
+     </div>
+  </div>
+  <div class="row text-end">
+    <div class="col-md-9">
+         <p>(ميد تقسيط) شركة ميد بنك للتمويل الاستهلاكي </p>
+    </div>
+     <div class="col-md-3">
+         <label>: الي السادة</label>
+     </div>
+  </div>
+  <div class="row text-end">
+    <div class="col-md-9">
+        <p>{{MerchantDetail.merchantName}} </p>
+    </div>
+     <div class="col-md-3">
+         <label>: من التاجر / مقدم الخدمة </label>
+     </div>
+  </div>
+
+  <div class="row text-end">
+    <div class="col-md-12">
+       <p class="note">
+           نرجو من سيادتكم تحويل صافي مبلغ {{SumofMerchantDue | number}}
+           جم , وذلك نظير قيمة المعاملات الموضحة ادناه
+       </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <br>
+      <table class="table table-striped">
+           <thead>
+               <th>رقم المعاملة</th>
+               <th>قيمة المعاملة</th>
+               <th>عمولة التاجر</th>
+               <th> خصم التاجر</th>
+               <th>مصاريف ادارية </th>
+               <th> الصافي </th>
+           </thead>
+           <tbody>
+              <tr *ngFor="let item of checkedList">
+                <td>{{item.debtRecordCode}}</td>
+                <td>{{item.loanAmount}}</td>
+                <td>{{item.merchantCommission}}</td>
+                <td>{{item.merchantDiscount}}</td>
+                <td>{{item.adminFee}}</td>
+                <td>{{item.merchantDue}}</td>
+              </tr>
+           </tbody>
+           <tfoot *ngIf="checkedList.length > 0">
+              <tr>
+                <td>{{countDebtRecordCode| number}}</td>
+                <td>{{sumLoanAmount| number}}</td>
+                <td> {{sumCommissionAmount| number}}</td>
+                <td>{{sumMerchantDiscount| number}}</td>
+                <td>{{sumAdminFee| number}}</td>
+                <td>{{SumofMerchantDue| number}}</td>
+              </tr>
+           </tfoot>
+      </table>
+      <br>
+  </div>
+
+  <br>
+
+  <div class="row text-end">
+      <p class="note">برجاء التكرم بالدفع خلال خمسة ايام عمل من تاريخ المطالبة</p>
+  </div>
+
+  <div class="row text-end">
+    <div class="col-md-10">
+        <p>{{MerchantDetail.commercialNumber}}</p>
+    </div>
+     <div class="col-md-2">
+         <label> : سجل تجاري رقم  </label>
+     </div>
+  </div>
+
+  <div class="row text-end">
+    <div class="col-md-10">
+        <p>{{MerchantDetail.taxCardNumber}}</p>
+    </div>
+     <div class="col-md-2">
+         <label> : بطاقة ضريبية رقم    </label>
+     </div>
+  </div>
+
+  <div class="row text-end">
+    <div class="col-md-10">
+        <p>{{MerchantDetail.bankAccount}}</p>
+    </div>
+     <div class="col-md-2">
+         <label> :   بنك    </label>
+     </div>
+  </div>
+
+
+  <div class="row text-end">
+    <div class="col-md-10">
+        <p>{{MerchantDetail.swiftCode}}</p>
+    </div>
+     <div class="col-md-2">
+         <label> IBAN    </label>
+     </div>
+  </div>
+
+  <br>
+
+  <div class="row text-center" style="min-height: 200px;">
+
+       <div class="col-md-6">
+        <h4>ختم التاجر</h4>
+       </div>
+       <div class="col-md-6">
+        <h4>توقيع</h4>
+   </div>
+  </div>
+
+ 
+
+</div>
+</div>
+
+ 
+</div> -->
+

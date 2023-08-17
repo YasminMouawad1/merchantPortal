@@ -1,0 +1,444 @@
+
+<div class="container-fluid">
+   <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+             <div class="title">
+                  <!-- <p>10:01 AM, Wednesday, 31 August 2022</p> -->
+                  <h2> Claims</h2>
+             </div>
+        </div>
+        <div class="col-md-6">
+           <div class="input-group mb-3 search">
+               <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+               <input type="text" class="form-control" [(ngModel)]="SearchTerm"
+               placeholder="Search " aria-describedby="basic-addon1">
+             </div>
+        </div>
+   </div>
+</div>
+
+<div class="row mt-4">
+
+   <p *ngIf="claimRequestsForMerchantData.length == 0" class="alert alert-warning text-center">Data is empty</p>
+
+   <div class="expand">
+      <table>
+         <tbody   *ngFor="let merchant of claimRequestsForMerchantData | searchClaims : SearchTerm;let i=index" >
+         <tr>
+            <td>
+               <table [style.background-color]="!hideme[i] ? '#eceff1' : '#e5f4ef'" style="width: 85%;">
+                  <tr>
+                     <th>Claim Number / رقم المطالبة</th>
+                     <th>Transactions Count / عدد الطلبات</th>
+                     <th>Claim Amount / اجمالي المطالبة</th>
+                     <!-- <th>Claim Date / تاريخ المطالبة</th> -->
+                     <th>Status / الحالة</th>
+                     <th rowspan="2">
+                       <button data-bs-toggle="collapse" data-bs-target="#i" aria-expanded="false" aria-controls="collapseExample" (click)="changeValue(i)">
+                         <i *ngIf="!hideme[i]" class="fa-sharp fa-solid fa-caret-down"> </i>
+                         <i *ngIf="hideme[i]" class="fa-sharp fa-solid fa-caret-up"></i>
+                     </button>
+                   </th>
+                  </tr>
+                  <tr>
+                     <td>{{merchant.claimNo}}</td>
+                     <td>{{transitionCount[i]}}</td>
+                     <td>{{claimsAmount[i]}}</td>
+                     <!-- <td></td> -->
+                     <td>
+                        {{merchant.statusAname}}
+                        <i *ngIf="merchant.showDownloadBtn" class="fa fa-file-pdf filePdf"
+                            data-bs-toggle="modal" data-bs-target="#downloadPDF" (click)="claimPDF(merchant.claimNo)">
+                        </i>
+                     </td>
+                  </tr>
+              </table>
+            </td>
+         </tr>
+         <ng-container *ngIf="hideme[i]">
+            <tr  *ngFor="let entity of merchant.claimDetailsEntities">
+               <td>
+                  <div class="show" id="i">
+                     <div class="expand mt-2">
+                         <table class="w-100" [style.background-color]="!hideme[i] ? '#eceff1' : '#e5f4ef'">
+                             <tr>
+                              <th>Transaction No.</th>
+                                <th>Branch name</th>
+                                <th>Client's name</th>
+                                <th>Down payment</th>
+                                <th>Loan Amount</th>
+                                <th>Admin fees</th>
+                                <th>Merchant Due</th>
+                                <!-- <th>National ID</th> -->
+                                <th>Merchant Discount</th>
+                                <th>Merchant Commission</th>
+                                <th>Booking Date</th>
+                                <th>Status</th>
+                             </tr>
+                             <tr>
+                                <td>{{entity.debtRecordCode}}</td>
+                                <td>{{entity.branchEname}}</td>
+                                <td
+                                class="text-truncate"
+                                style="max-width: 130px;direction: rtl;"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                title="{{ entity.custAname }}">{{entity.custAname}}</td>
+                                <td>{{entity.downPaymentAmount}}</td>
+                                <td>{{entity.loanAmount}}</td>
+                                <td>{{entity.adminFee}}</td>
+                                <td>{{entity.merchantDue}}</td>
+                                <!-- <td>{{entity.nationalIdno}}</td> -->
+                                <td>{{entity.merchantDiscount}}</td>
+                                <td>{{entity.merchantCommission}}</td>
+                                <td>{{entity.bookingDate}}</td>
+                                <td>{{entity.statusAname}}</td>
+                             </tr>
+                         </table>
+                      </div>
+                 </div>
+               </td>
+            </tr>
+         </ng-container>
+
+   </tbody>
+    </table>
+
+
+</div>
+
+
+  <!--------- Modal for download pdf ------------------->
+<div class="modal fade" id="downloadPDF" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content">
+
+      <div>
+         <button class="btn btn-primary download" (click)="convetToPDF()">Download PDF</button>
+      </div>
+      <div id="hidFilePdf">
+         <div id="filePdfTransaction" class="container mt-lg-4">
+          <div class="containPDF">
+            <div class="row mb-4">
+                 <div class="col-md-5">
+                      <img src="{{MerchantDetail.merchantLogo}}" alt="" class="logopdf">
+                 </div>
+                 <div class="col-md-7">
+                     <h2>مطالبة مالية</h2>
+                 </div>
+            </div>
+
+           <div class="contain-data">
+
+           <div class="row text-end">
+             <div class="col-md-9">
+                 <p>{{timeStamp | date : 'short'}}</p>
+             </div>
+              <div class="col-md-3">
+                  <label>: التاريخ</label>
+              </div>
+           </div>
+           <div class="row text-end">
+             <div class="col-md-9">
+                  <p>(ميد تقسيط) شركة ميد بنك للتمويل الاستهلاكي </p>
+             </div>
+              <div class="col-md-3">
+                  <label>: الي السادة</label>
+              </div>
+           </div>
+           <div class="row text-end">
+             <div class="col-md-9">
+                 <p>{{MerchantDetail.merchantName}} </p>
+             </div>
+              <div class="col-md-3">
+                  <label>: من التاجر / مقدم الخدمة </label>
+              </div>
+           </div>
+
+           <div class="row text-end">
+            <div class="col-md-9">
+                <p>{{cliamNumber}} </p>
+            </div>
+             <div class="col-md-3">
+                 <label> : رقم المطالبة  </label>
+             </div>
+          </div>
+
+           <div class="row text-end">
+             <div class="col-md-12">
+                <p class="note">
+                    نرجو من سيادتكم تحويل صافي مبلغ
+                    {{toalAmount| number}} جم ,
+                    وذلك نظير قيمة المعاملات الموضحة ادناه
+                </p>
+             </div>
+             <caption  lass="row" *ngIf="settledTransactions.length > 0" class="text-center">العمليات المستحقة</caption>
+
+           </div>
+
+           <div class="row" *ngIf="settledTransactions.length > 0">
+             <br>
+               <table class="table table-striped tabPDF">
+                  <thead>
+                     <th></th>
+                      <th>رقم المعاملة</th>
+                      <th>اسم الفرع </th>
+                      <th>اسم العميل</th>
+
+                      <th>دفعة مقدمة</th>
+                      <th>قيمة المعاملة </th>
+                      <th>مصاريف ادارية</th>
+                      
+                      <th> خصم التاجر </th>
+                      <th>قيمة عمولة التاجر</th>
+                      <th>قيمة عرض التاجر</th>
+                      <th>نسبة عمولة التاجر</th>
+                      <th> تاريخ المعاملة</th>
+                      <th>الصافي  </th> 
+                    </thead>
+                    <tbody>
+                       <tr *ngFor="let item of settledTransactions">
+                        <td>
+                          <img [ngStyle]="{ 'display':item.isPromotion ? 'block':'none'}"
+                          src="../../../../../assets/images/promotion.png" class="promoIcon">
+                        </td>
+                        <td>{{item.debtRecordCode}}</td>
+                        <td>{{item.branchEname}}</td>
+                        <td>{{item.custAname}}</td>
+
+                        <td>{{item.downPaymentAmount}}</td>
+                        <td>{{item.loanAmount}}</td>
+                        <td>{{item.adminFee}}</td>
+                        
+                        <td>{{item.merchantDiscount}}</td>
+                        <td>{{item.merchantCommission}}</td>
+                        <td> {{item.merchantCommissionPromotion}}</td>
+                        <td>{{item.merchantCommissionRate}} %</td>
+                        <td>{{item.bookingDate}}</td>
+                        <td>{{item.merchantDue}}</td> 
+
+                       </tr>
+                    </tbody>
+                    <tfoot *ngIf="settledTransactions.length > 0">
+                       <tr>
+                         <td> </td>
+                         <td> </td>
+                         <td> </td>
+                         <td> </td>
+
+                         <td>{{totalDownPaymentAmountSetteled| number}}</td>
+                         <td>{{totalLoanAmountSetteled| number}}</td>
+                         <td>{{totalAdminFreeSetteled| number}}</td>
+                        
+                        
+                         <td>{{totalMerchantDiscountSettled| number}}</td>
+                         <td>{{totalMerchantCommisionSettled| number}}</td>
+                         <td>{{totalMerchantPromotionSettled| number}}</td>
+                         <td></td>
+                         <td></td>
+                         <td>{{totalMerchantDueSettled| number}}</td>
+                       </tr>
+                    </tfoot>
+               </table>
+               <br>
+           </div>
+
+           <br><br>
+           <div *ngIf="canceledTransactions.length > 0" class="row text-end">
+           <caption class="text-center">العمليات الملغاة</caption>
+           </div>
+           <div class="row"  *ngIf="canceledTransactions.length > 0">
+            <br>
+              <table class="table table-striped tabPDF">
+                   <thead>
+                    <th></th>
+                       <th>رقم المعاملة </th>
+
+
+                       <th>دفعة مقدمة</th>
+                       <th>قيمة المعاملة </th>
+                       <th>مصاريف ادارية</th>
+
+                       <th> خصم التاجر</th>
+                       <th>قيمة عمولة التاجر</th>
+                       <th>قيمة عرض التاجر</th>
+                       <th>نسبة عمولة التاجر</th>
+                       <th> تاريخ المعاملة </th>
+                       <th>الصافي</th>
+
+                   </thead>
+                   <tbody>
+                      <tr *ngFor="let item of canceledTransactions">
+                        <td>
+                          <img [ngStyle]="{ 'display':item.isPromotion ? 'block':'none'}"
+                          src="../../../../../assets/images/promotion.png" class="promoIcon">
+                        </td>
+                        <td>{{item.debtRecordCode}}</td>
+
+                        <td>{{item.downPaymentAmount}}</td>
+                        <td>{{item.loanAmount}}</td>
+                        <td>{{item.adminFee}}</td>
+
+                        <td>{{item.merchantDiscount}}</td>
+                        <td>{{item.merchantCommission}}</td>
+                        <td> {{item.merchantCommissionPromotion}}</td>
+                        <td>{{item.merchantCommissionRate}} %</td>
+                        <td>{{item.bookingDate}}</td>
+                        <td>{{item.merchantDue}}</td>
+
+
+                      </tr>
+                   </tbody>
+                   <tfoot *ngIf="canceledTransactions.length > 0">
+                     <tr>
+                      <td></td>
+                       <td> </td>
+
+                       <td>{{totalDownPaymentAmountCancel| number}}</td>
+                       <td>{{totalLoanAmountCancel| number}}</td>
+                       <td>{{totalAdminFreeCancel| number}}</td>
+
+                       <td>{{totalMerchantDiscountConcel| number}}</td>
+                       <td>{{totalMerchantCommisionConcel| number}}</td> 
+                       <td>{{totalMerchantPromotionConcel| number}}</td>
+                       <td></td>
+                       <td></td>
+                       <td>{{totalMerchantDuecancel| number}}</td>
+                     </tr>
+                  </tfoot>
+              </table>
+              <br>
+          </div>
+
+          <br><br>
+          <div *ngIf="deductedTransactions.length > 0" class="row text-end">
+            <caption class="text-center">العمليات ملغاة من عمليات سابقة</caption>
+          </div>
+          <div class="row" *ngIf="deductedTransactions.length > 0">
+            <br>
+              <table class="table table-striped tabPDF">
+
+                   <thead>
+                    <th></th>
+                    <th>رقم المعاملة </th> 
+                    <th>دفعة مقدمة</th>
+                    <th>قيمة المعاملة</th>
+                    <th>مصاريف ادارية</th>
+                   
+                    <th> خصم التاجر</th>
+                    <th>قيمة عمولة التاجر</th>
+                    <th>قيمة عرض التاجر</th>
+                    <th>نسبة عمولة التاجر</th>
+                    <th> تاريخ المعاملة </th>
+                    <th>الصافي</th> 
+                   </thead>
+                   <tbody>
+                      <tr *ngFor="let item of deductedTransactions">
+                        <td>
+                          <img [ngStyle]="{ 'display':item.isPromotion ? 'block':'none'}"
+                            src="../../../../../assets/images/promotion.png" class="promoIcon">
+                        </td>
+                        <td>{{item.debtRecordCode}}</td>
+                         
+                        <td>{{item.downPaymentAmount}}</td>
+                        <td>{{item.loanAmount}}</td>
+                        <td>{{item.adminFee}}</td>
+
+                        <td>{{item.merchantDiscount}}</td>
+                        <td>{{item.merchantCommission}}</td>
+                        <td> {{item.merchantCommissionPromotion}}</td>
+                        <td>{{item.merchantCommissionRate}} %</td>
+                        <td>{{item.bookingDate}}</td>
+                        <td>{{item.merchantDue}}</td>
+
+                      </tr>
+                   </tbody>
+                   <tfoot *ngIf="deductedTransactions.length > 0" >
+                     <tr>
+                      <td></td>
+                       <td> </td>
+
+                       <td>{{totalDownPaymentAmountDeducted| number}}</td> 
+                       <td>{{totalLoanAmountDeducted| number}}</td>
+                       <td>{{totalAdminFreeDeducted| number}}</td>
+
+                       <td> {{totalMerchantDiscountDeducted| number}}</td>
+                       <td>{{totalMerchantCommisionDeducted| number}}</td>
+                       <td>{{totalMerchantPromotionDeducted| number}}</td> 
+                       <td></td>
+                       <td></td>
+                       <td>{{totalMerchantDuededucted| number}}</td>
+
+                     </tr>
+                  </tfoot>
+              </table>
+              <br>
+          </div>
+
+           <div class="row text-end">
+               <p class="note">برجاء التكرم بالدفع خلال خمسة ايام عمل من تاريخ المطالبة</p>
+           </div>
+
+           <div class="row text-end">
+             <div class="col-md-10">
+                 <p>{{MerchantDetail.commercialNumber}}</p>
+             </div>
+              <div class="col-md-2">
+                  <label> : سجل تجاري رقم  </label>
+              </div>
+           </div>
+
+           <div class="row text-end">
+             <div class="col-md-10">
+                 <p>{{MerchantDetail.taxCardNumber}}</p>
+             </div>
+              <div class="col-md-2">
+                  <label> : بطاقة ضريبية رقم    </label>
+              </div>
+           </div>
+
+           <div class="row text-end">
+             <div class="col-md-10">
+                 <p>{{MerchantDetail.bankAccount}}</p>
+             </div>
+              <div class="col-md-2">
+                  <label> :   بنك    </label>
+              </div>
+           </div>
+
+
+           <div class="row text-end">
+             <div class="col-md-10">
+                 <p>{{MerchantDetail.swiftCode}}</p>
+             </div>
+              <div class="col-md-2">
+                  <label> IBAN    </label>
+              </div>
+           </div>
+
+           <br>
+
+           <div class="row text-center" style="min-height: 200px;">
+
+                <div class="col-md-6">
+                 <h4>ختم التاجر</h4>
+                </div>
+                <div class="col-md-6">
+                 <h4>توقيع</h4>
+            </div>
+           </div>
+          </div>
+
+
+         </div>
+         </div>
+
+
+         </div>
+     </div>
+   </div>
+ </div>
+
+
+
+</div>

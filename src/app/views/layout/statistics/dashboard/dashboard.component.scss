@@ -1,0 +1,243 @@
+
+.content{
+    position: relative;
+}
+.overlay-img{ 
+    height: 19vh;
+    width: 100%;
+    text-align: right;
+}
+
+.overlay-img img{
+    width: 31%;
+}
+
+.title p{
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+ }
+ 
+ .title h2{
+     font-size: 20px;
+     font-weight: bold;
+     color: #661a74;
+ }
+ 
+ .search{
+     width: 85%;
+     float: right;
+ }
+ 
+ .search span{
+     border: 2px solid #ced4da;
+     border-radius: 12px;
+     border-right: 0px;
+     background-color: transparent;
+ }
+ 
+ .search input{
+     border: 2px solid #ced4da;
+     border-radius: 12px;
+     border-left: 0px;
+ }
+
+.container{
+    width: 90%;
+}
+.item{
+    padding: 5%;
+    border-radius: 20px;
+    box-shadow: 5px 5px 14px 3px #eceff1;
+}
+
+.item h6{
+   color: #afb1b2;
+   text-align: right;
+}
+
+.item .sales{
+   display: flex; 
+   align-items: center;
+   margin-top: 1.5rem;
+   justify-content: space-between;
+}
+
+.num{
+    width: 50%;
+}
+
+.num h3{
+   font-weight: bold;
+   color: #424242;
+   margin-bottom: 4px;
+   font-size: 1.2rem;
+}
+
+.num p{
+  font-weight: bold;
+   color: #f30b0b;
+   margin-bottom: 4px;
+   font-size: 12px;
+}
+
+.num #product{
+    color: #04b604;
+}
+ 
+ 
+.chart svg{
+    width: 90%;
+    height: 60px;
+}
+
+.card{
+    border: none;
+    border-radius: 20px;
+    box-shadow: 5px 5px 14px 3px #eceff1;
+}
+
+.card-header{
+    background-color: #fff;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+}
+
+.card-header h6, h6{
+    font-weight: bold;
+    color: #5e5a5a;
+    font-size: 1.2rem;
+}
+
+.card-header .form-select{
+    width: 16%;
+}
+
+.daliyTrans{
+    text-align: center;
+    color: #afb1b2;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+}
+.pendP{
+    float: right;
+    font-weight: bold;
+    color: #686666;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+
+.expand table{
+    width: 96%; 
+    margin: auto;
+    border-radius: 14px;
+}
+
+.expand table th{
+    padding-top: 15px;
+    padding-left: 15px;
+    font-size: 10px;
+    color: #6b6a6a;
+}
+
+table td{
+    text-align: center;
+}
+
+.expand table td{
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+.expand table button{
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+}
+
+.light table{
+    background-color: #f8f9fa;
+}
+
+.filePdf{
+    margin-left: 5px;
+    color: #0b7e4d;
+    cursor: pointer;
+}
+
+
+.logopdf{
+    max-width:180px;
+    border-radius: 50%;
+ }
+
+ .download{
+    background-color: #8d5d95;
+    border: #8d5d95;
+    float: right;
+    margin-right: 2rem;
+    margin-top: 1rem;
+ }
+
+ .contain-data{ 
+    margin: 0 auto;
+    padding: 20px; 
+ }
+
+ .contain-data label{
+    font-weight: 600;
+    font-family: 'fantasy';
+    font-size: 18px;
+ }
+
+ .contain-data .note{
+    font-family: 'fantasy';
+    font-size: 18px;
+    text-align: center;
+    margin: 30px 0px;
+ }
+
+ .modal-content{
+    width: 90vw;
+    transform: translateX(-31%);
+ }
+
+ #filePdfTransaction{ 
+    width: 95%;
+    margin: 0 auto;
+    padding: 2rem;
+ }
+
+ table tfoot{
+    background-color: #8d5d95;
+    color: #fff;
+}
+
+.tabPDF tr td , .tabPDF thead th{
+    border: 1px solid #4a474a;
+}
+
+.containPDF{
+    border: 2px double #ddd;
+    padding: 2rem;
+}
+
+.divTilte{
+    width: 80%;
+    margin: 5rem auto;
+    padding: 1rem;
+}
+
+.divTilte h2{
+    text-align: center;
+    font-family: 'system-ui';   
+    color: #661a74;
+}

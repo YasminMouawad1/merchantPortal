@@ -1,0 +1,260 @@
+.title p{
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+ }
+ 
+ .title h2{
+     font-size: 20px;
+     font-weight: bold;
+     color: #661a74;
+ }
+ 
+ .search{
+     width: 85%;
+     float: right;
+ }
+ 
+ .search span{
+     border: 2px solid #ced4da;
+     border-radius: 12px;
+     border-right: 0px;
+     background-color: transparent;
+ }
+ 
+ .search input{
+     border: 2px solid #ced4da;
+     border-radius: 12px;
+     border-left: 0px;
+ }
+
+.nav-tabs{
+    border-bottom: none;
+}
+
+.nav-tabs li{
+    width: 20%;
+}
+
+.nav-tabs li a{
+    border: none;
+    color: #000;
+    font-weight: bold;
+}
+
+.nav-tabs .nav-link.active{
+    color: #661a74; 
+}
+
+
+.nav-tabs .nav-link.active .line{
+    width: 35%;
+    height: 2px;
+    background-color: #661a74;
+}
+
+.item{
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.item table{
+    text-align: center;
+}
+.item table tr th{
+   font-size: 11px;
+}
+
+.item table tr td{
+    font-size: 13px;
+ }
+
+.pending{
+    min-height: 100vh;
+    overflow-y: scroll;
+}
+
+.item table{
+    width: 98%;
+    background-color: #eceff1;
+    margin-bottom: 10px;
+    border-radius: 15px
+}
+
+.item table th{
+    padding-top: 15px;
+    font-size: 12px;
+    color: #6c6c6c;
+}
+
+.item table th:nth-child(1),
+.item table th:nth-child(2){
+    padding-left: 17px;
+}
+
+.item table td{
+    padding-bottom: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.item table td:first-child{
+    padding-left: 17px;
+}
+
+.item table .form-check-input[type=checkbox]{
+    height: 1.4em;
+    width: 1.5em;
+    cursor: pointer;
+    border: 1px solid #bdc2c5;
+}
+.item table .form-check-input:checked{
+    background-color: #04864e;
+    border-color: #04864e;
+}
+
+table tfoot{
+    background-color: #5a1e68;
+    color: #fff;
+}
+
+ .btnClaim{
+    background-color: #04864e;
+    color: #fff;
+    margin-top: 15px;
+    padding: 9px 38px;
+    border-radius: 21px;
+    font-weight: bold;
+}
+ 
+.modal-dialog{
+    margin: 0px;
+}
+.modal-content{
+    margin-top: 10vh;
+    width: 80vw;
+    margin-left: 10vw;
+    max-height: 85vh;
+}
+.modal-body{
+    flex-direction: column;
+    text-align: center;
+}
+.modal-body img{
+   width: 15%;
+}
+
+.modal-body h5{
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+   margin-top: 6px;
+}
+
+.showData{
+    height: 55vh;
+}
+
+.showData table{
+    background-color: #e5f4ef;
+}
+
+.showData table{
+    width: 98%;
+}
+
+.cancel{
+    color: #3f3f3f;
+    margin-left: 20px;
+    background-color: transparent;
+}
+
+.spWarning{
+    position: absolute;
+    left: 40%;
+    bottom: 13%;
+}
+
+ #filePdfTransaction{
+   width: 94%;
+   margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    margin-top: 4rem !important;
+ }
+
+ #filePdfTransaction h2{
+    font-family: 'cursive';
+ }
+
+ .contain-data{ 
+    margin: 0 auto;
+    padding: 20px; 
+ }
+
+ .contain-data label{
+    font-weight: 600;
+    font-family: 'fantasy';
+    font-size: 18px;
+ }
+
+ .contain-data .note{
+    font-family: 'fantasy';
+    font-size: 18px;
+    text-align: center;
+    margin: 30px 0px;
+ }
+
+ .logopdf{
+    max-width:180px;
+    border-radius: 50%;
+ }
+
+ .download{
+    background-color: #8d5d95;
+    border: #8d5d95;
+    float: right;
+    margin-right: 2rem;
+    margin-top: 1rem;
+ }
+
+ .mat-form-field{
+    width: 100%; 
+    padding-bottom: 0px;
+ }
+ 
+ .mat-date-range-input { 
+    width: 80%;
+    float: left;
+    font-size: 14px;
+}
+
+.btnToggle{ 
+    width: 27px !important;
+    height: 27px !important; 
+}
+
+.btnExcel{
+    border: none;
+    color: #fff;
+    margin-bottom: 1.2rem;
+    background-color: #198754;
+    border-radius: 5px;
+    padding: 5px 16px;
+}
+
+.tabAll tr{
+    border-width: 2px;
+    line-height: 2.4;
+}
+
+.tabAll tr:first-child{
+    border-width: 0px;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-infix {
+    padding-bottom: 0px !important;
+}
+
+ 
